@@ -23,6 +23,7 @@ public class Game_Of_Life {
         createTable();
         populateCell();
         printTable();
+        neighborCheck();
     }
 
     public static void createTable(){
@@ -30,7 +31,7 @@ public class Game_Of_Life {
 
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
-                table[i][j] = '-';
+                table[i][j] = '0';
             }
         }
     }
@@ -53,21 +54,36 @@ public class Game_Of_Life {
     public static void populateCell(){
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
-                table[0][0] = 'o';
-                table[1][0] = '0';
-                table[1][1] = '0';
+                table[0][0] = '1';
+                table[1][0] = '1';
+                table[1][1] = '1';
             }
         }
     }
 
-    public static Boolean isAlive(){
+    public static void neighborCheck(){
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                if(table[i][j] == '1'){
+                    if(table[i + 1][j] == '1' && table[i + 1][j + 1] == '1' || table[i][j + 1] == '1'){
+                        System.out.println("(0,0) remains alive ");
+                        System.out.println("just checking: " + "("+ i + 1 + "," + j + ")" );
+                        System.out.println("just checking: " + "("+ (i + 1) + "," + (j + 1) + ")" );
+                        System.out.println("just checking: " + "("+ i + 1 + "," + (j + 1) + ")" );
+                    }
+                    else{
+                        System.out.println("(0,0) should be dead");
+                    }
+                    //check if this position have an 'o'
+                    //if it has an o
+                    //System.out.println("this unit have a live cell: " + "("+ i + "," + j + ")");
+            }
+                else if(table[i][j] == '0'){
 
-        return true;
-    }
+                    //System.out.println("this unit have a dead cell: " + "("+ i + "," + j + ")");
+                }
 
-    //Do I really 2 boolean check to see if it's alive or dead?
-    public static Boolean isDead(){
-
-        return false;
+            }
+        }
     }
 }
