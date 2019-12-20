@@ -14,36 +14,60 @@
  * All other live cells die in the next generation. Similarly, all other dead cells stay dead.
  */
 
-import java.util.*;
+import java.util.*; //Probably don't even need this
 
 public class Game_Of_Life {
-    public static char[][] board = new char[3][3]; //test
+    public static char[][] table = new char[3][3]; //test
 
     public static void main(String[] args){
-        createGrid();
-        printGrid();
+        createTable();
+        populateCell();
+        printTable();
     }
 
-    public static void createGrid(){
+    public static void createTable(){
         //Create a 3x3 grid and check
 
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
-                board[i][j] = '-';
+                table[i][j] = '-';
             }
         }
     }
 
-    public static void printGrid(){
+    public static void printTable(){
         System.out.println("-----------");
+
 
         for(int i = 0; i < 3; i++){
             System.out.print("|");
             for(int j = 0; j < 3; j++){
-                System.out.print(board[i][j] + "|");
+                System.out.print(table[i][j] + "|");
             }
             System.out.println();
             System.out.println("-------");
         }
+    }
+
+    //'o' will represent live cells
+    public static void populateCell(){
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                table[0][0] = 'o';
+                table[1][0] = '0';
+                table[1][1] = '0';
+            }
+        }
+    }
+
+    public static Boolean isAlive(){
+
+        return true;
+    }
+
+    //Do I really 2 boolean check to see if it's alive or dead?
+    public static Boolean isDead(){
+
+        return false;
     }
 }
