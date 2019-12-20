@@ -16,37 +16,44 @@
 
 import java.util.*; //Probably don't even need this
 
-public class Game_Of_Life {
-    public static char[][] table = new char[3][3]; //test
+import java.util.Scanner;
 
+public class Game_Of_Life {
+    public static final int X = 100;
+    public static final int Y = 100;
+    public static char[][] table = new char[X][Y]; //default 2D Array
     public static void main(String[] args){
-        createTable();
+
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Choose size for x: ");
+        String x = scan.nextLine();
+        System.out.print("Choose size for y: ");
+        String y = scan.nextLine();
+        System.out.println("The table will be a: " + x + "x" + y + " table.");
+        createTable(Integer.parseInt(x), Integer.parseInt(y));
         populateCell();
-        printTable();
-        neighborCheck();
+        printTable(Integer.parseInt(x), Integer.parseInt(y));
+        neighborCheck(Integer.parseInt(x), Integer.parseInt(y));
     }
 
-    public static void createTable(){
+    public static void createTable(int x, int y){
         //Create a 3x3 grid and check
 
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
+        for(int i = 0; i < x; i++){
+            for(int j = 0; j < y; j++) {
                 table[i][j] = '0';
             }
         }
     }
 
-    public static void printTable(){
-        System.out.println("-----------");
+    public static void printTable(int x, int y){
 
-
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i < x; i++){
             System.out.print("|");
-            for(int j = 0; j < 3; j++){
+            for(int j = 0; j < y; j++){
                 System.out.print(table[i][j] + "|");
             }
             System.out.println();
-            System.out.println("-------");
         }
     }
 
@@ -61,29 +68,22 @@ public class Game_Of_Life {
         }
     }
 
-    public static void neighborCheck(){
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
-                if(table[i][j] == '1'){
-                    if(table[i + 1][j] == '1' && table[i + 1][j + 1] == '1' || table[i][j + 1] == '1'){
-                        System.out.println("(0,0) remains alive ");
-                        System.out.println("just checking: " + "("+ i + 1 + "," + j + ")" );
-                        System.out.println("just checking: " + "("+ (i + 1) + "," + (j + 1) + ")" );
-                        System.out.println("just checking: " + "("+ i + 1 + "," + (j + 1) + ")" );
-                    }
-                    else{
-                        System.out.println("(0,0) should be dead");
-                    }
-                    //check if this position have an 'o'
-                    //if it has an o
-                    //System.out.println("this unit have a live cell: " + "("+ i + "," + j + ")");
-            }
-                else if(table[i][j] == '0'){
-
-                    //System.out.println("this unit have a dead cell: " + "("+ i + "," + j + ")");
+    public static void neighborCheck(int x, int y) {
+        int neighbors1, neighbors2, neighbors3 , neighbors4, neighbors5, neighbors6, neighbors7, neighbors8;
+        int neighbors;
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
+                try{
+                    neighbors1 = table[x - 1][y - 1];
                 }
-
+                catch(ArrayIndexOutOfBoundsException e ){
+                    neighbors1 = 0;
+                }
             }
         }
+    }
+
+    public static void updateTable(){
+
     }
 }
